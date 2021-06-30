@@ -1,8 +1,55 @@
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans&display=swap');
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: 'PT Sans', sans-serif;
+body{
+font-family: "Roboto Condesed" sans-serif;
+}
+
+
+/**************************************NAVBAR***********************************************/
+.logo{
+  width:100px;
+}
+
+/*----------NAV -----------*/
+nav{
+  background-color: #0B1D2F;  
+}
+.navbar-nav >li >a {
+  margin-right:12px;
+}
+
+/*----------NAV Links-----------*/
+nav a.nav-link{
+  font-weight:500;
+  letter-spacing:0.6px;
+  cursor:pointer;
+  color: rgb(255, 255, 255);
+   
+}
+nav ul li{
+  text-transform: uppercase;
+  padding-right: 4rem;
+}
+
+/*-----------NAV Btn--------*/
+.button1 {
+  transition-duration: 0.4s;
+  background-color: #F58A07; /* Green */
+  border: none;
+  color: white;  
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: 500;
+  padding: 10px 30px;
+  margin: right 10px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 12px;
+  align-items: center;
+}
+
+.button1:hover {
+  background-color: #084887; /* Green */
+  color: white;
 }
