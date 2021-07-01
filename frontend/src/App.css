@@ -82,3 +82,20 @@ nav ul li{
   color:#F58A07;
   align-items: center;
 }
+
+/**************************************Card1***********************************************/
+.card1-wrapper{
+  position: relative;
+  background-color: #0B1D2F;  
+  background-size: cover;
+  background-position: center;
+  height: 86vh;
+}
+.imbox{
+  position: relative;
+  background:url('./components/image/im1.jpg') no-repeat;
+  align-items: left;
+  height: 500px;
+  width: 500px;
+  height: 20vh;
+}
