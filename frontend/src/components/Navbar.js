@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from "../logo.JPG";
+import logo from "./image/logo.JPG";
 /*react font awesome */
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
@@ -24,7 +24,7 @@ function Navbar() {
         <a className="nav-link" href="#">Workout plans</a>
       </li>
       <li className="nav-item">
-        <a className="nav-link" href="#">Blog</a>
+        <a className="nav-link" href="#">shop</a>
       </li>
       <li className="nav-item">
         <a className="nav-link" href="#">Contact</a>

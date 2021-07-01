@@ -21,6 +21,7 @@ nav{
 /*----------NAV Links-----------*/
 nav a.nav-link{
   font-weight:500;
+  font-size: small;
   letter-spacing:0.6px;
   cursor:pointer;
   color: rgb(255, 255, 255);
@@ -52,4 +53,32 @@ nav ul li{
 .button1:hover {
   background-color: #084887; /* Green */
   color: white;
+}
+
+/**************************************HEADER***********************************************/
+.header-wrapper{
+  position: relative;
+  background: url('./components/image/im1.jpg') no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 86vh;
+
+}
+.main-info{
+  display: flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: "Roboto Condesed" sans-serif;
+}
+.main-info h1,h3{
+  
+  color: #084887;
+}
+/**************************************Typed Text**********************************************/
+.typed-text{
+  font-size:30px;
+  color:#F58A07;
+  align-items: center;
 }
