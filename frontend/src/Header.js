@@ -1,8 +1,10 @@
 import React from 'react';
 import Typed from 'react-typed';
-import im2 from "./image/im2.jpg";
-import im3 from "./image/im3.jpg";
-import im4 from "./image/im4.jpg";
+import im2 from "./components/image/im2.jpg";
+import im3 from "./components/image/im3.jpg";
+import im4 from "./components/image/im4.jpg";
+import im5 from "./components/image/im5.jpg";
+import im6 from "./components/image/im6.jpg";
 import { Container,Row,Col,Figure } from 'react-bootstrap';
 
 
@@ -79,8 +81,8 @@ const Header = () => {
                     <div class="col col-lg-4">
                         <div class="responsive">
                             <div class="gallery">
-                                <a target="_blank" href={im2}>
-                                <img src={im2} alt="Cinque Terre" width="300px" height="400"/>
+                                <a target="_blank" href={im6}>
+                                <img src={im6} alt="Cinque Terre" width="300px" height="400"/>
                                 </a>
                                 <div class="desc">
                             <button class="button2 " type="button">Sports Wears</button>
@@ -91,8 +93,8 @@ const Header = () => {
                     <div class="col col-lg-4">  
                     <div class="responsive">
                         <div class="gallery">
-                            <a target="_blank" href={im2}>
-                            <img src={im2} alt="Cinque Terre" width="300px" height="400"/>
+                            <a target="_blank" href={im5}>
+                            <img src={im5} alt="Cinque Terre" width="300px" height="400"/>
                             </a>
                             <div class="desc">
                             <button class="button2 " type="button">Suppliments</button>

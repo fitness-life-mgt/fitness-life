@@ -1,8 +1,9 @@
 import React from 'react';
-import logo from "./image/logo.JPG";
+import logo from './components/image/logo.JPG';
 /*react font awesome */
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
 
 function Navbar() {
     return (
@@ -15,13 +16,14 @@ function Navbar() {
   <div className="collapse navbar-collapse" id="navbarSupportedContent">
     <ul className="navbar-nav ms-auto">
       <li className="nav-item active">
-        <a className="nav-link" href="#">Home <span className="sr-only"></span></a>
+        <a className="nav-link" href="/">Home <span className="sr-only"></span></a>
       </li>
       <li className="nav-item">
-        <a className="nav-link" href="#">About</a>
+        <a className="nav-link" href="/About">About<span className="sr-only"></span>                  
+          </a>
       </li>
       <li className="nav-item">
-        <a className="nav-link" href="#">Workout plans</a>
+        <a className="nav-link" href="/Workouts">Workout plans</a>
       </li>
       <li className="nav-item">
         <a className="nav-link" href="#">shop</a>
@@ -30,7 +32,7 @@ function Navbar() {
         <a className="nav-link" href="#">Contact</a>
       </li>
       <li className="nav-item">
-        <a className="nav-link" href="#">Sign- in</a>
+        <a className="nav-link" href="/Login">Sign- in</a>
       </li>
 
       <li className="navbtn">
