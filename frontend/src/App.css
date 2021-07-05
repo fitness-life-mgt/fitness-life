@@ -84,6 +84,12 @@ nav ul li{
   align-items: center;
 }
 
+.shp{
+  font-size:30px;
+  color:#F58A07;
+  align-items: center; 
+}
+
 /**************************************line**********************************************/
 .line{
   position: relative;
@@ -168,10 +174,11 @@ p {
 
 /**************************************shop***********************************************/
 .sh1 h2{
-  font-size: 40px;
-  color: white;
+  font-size: 50px;
+  color: #F58A07;
   text-align: center;
   margin-bottom: 50px;
+  font-weight: 600;
 }
 div.gallery {
     width:302.5px;
@@ -235,3 +242,185 @@ div.desc {
   border-radius: 12px;
   align-items: center;
 }
+
+/**************************************Footer**********************************************/
+.footer-wrapper{
+  position: relative;
+  background: url('./components/image/footer.png') no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 50vh;
+
+}
+.box1{
+  background-color: #0B1D2F; 
+  width: 320px;
+  padding: 10px;
+  border: 5px solid gray;
+  margin: 0;
+}
+/**************************************About Us***********************************************/
+header {
+  position: relative;
+  background-color: black;
+  height: 75vh;
+  min-height: 30rem;
+  width: 100%;
+  overflow: hidden;
+}
+
+header video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: 0;
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+}
+
+header .container {
+  position: relative;
+  z-index: 2;
+  
+}
+
+header .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  opacity: 0.5;
+  z-index: 1;
+}
+
+@media (pointer: coarse) and (hover: none) {
+  header {
+    background-color: black;
+  }
+  header video {
+    display: none;
+  }
+}
+.display-3{
+  color: #F58A07;
+  font-weight: 500;
+}
+p.lead.mb-0{
+  text-align: justify;
+}
+
+/**************************************Workouts***********************************************/
+.workout-wrapper{
+  position: relative;
+  background: url('./components/image/im7.jpg') no-repeat;
+  background-size: cover;
+  background-position: center;
+  height:100vh;
+
+}
+.line2{
+  position: relative;
+  background-color: #0B1D2F;  
+  background-size: cover;
+  background-position: center;
+  height: 10vh; 
+  align-items: center;
+}
+
+/**************************************Login***********************************************/
+
+
+
+@import url('https://fonts.googleapis.com/css?family=Numans');
+.login-wrapper{
+  position: relative;
+  background: url('./components/image/im8.jpg') no-repeat;
+  background-size: cover;
+  background-position: center;
+  height:100vh;
+}
+
+.cont{
+height: 100%;
+align-content: center;
+}
+
+.card5{
+height: 370px;
+margin-top: 50px;
+margin-bottom: auto;
+width: 400px;
+background-color: rgba(0,0,0,0.5) !important;
+border-color: #F58A07;
+
+}
+
+.social_icon span{
+font-size: 60px;
+margin-left: 10px;
+color: #FFC312;
+}
+
+.social_icon span:hover{
+color: white;
+cursor: pointer;
+}
+
+.card-header h3{
+color: white;
+}
+
+.social_icon{
+position: absolute;
+right: 20px;
+top: -45px;
+}
+
+.input-group-prepend span{
+width: 50px;
+background-color: #FFC312;
+color: black;
+border:0 !important;
+}
+
+input:focus{
+outline: 0 0 0 0  !important;
+box-shadow: 0 0 0 0 !important;
+
+}
+
+.remember{
+color: white;
+}
+
+.remember input
+{
+width: 20px;
+height: 20px;
+margin-left: 15px;
+margin-right: 5px;
+}
+
+.login_btn{
+color: black;
+background-color: #FFC312;
+width: 100px;
+}
+
+.login_btn:hover{
+color: black;
+background-color: white;
+}
+
+.links{
+color: white;
+}
+
