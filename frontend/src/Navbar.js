@@ -29,14 +29,15 @@ function Navbar() {
         <a className="nav-link" href="#">shop</a>
       </li>
       <li className="nav-item">
-        <a className="nav-link" href="#">Contact</a>
+        <a className="nav-link" href="/Contact">Contact</a>
       </li>
       <li className="nav-item">
         <a className="nav-link" href="/Login">Sign- in</a>
       </li>
 
       <li className="navbtn">
-      <button class="button1 " type="button">Become a Member</button>
+      <a class="button1" role="button" href="/Signup">Become a Member
+      </a>
       </li>
       
     </ul>

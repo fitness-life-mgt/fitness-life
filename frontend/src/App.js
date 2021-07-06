@@ -6,6 +6,9 @@ import Home from './Home';
 import About from './About';
 import Workouts from './Workouts';
 import Login from './Login';
+import Contact from './Contact';
+import Signup from './Signup';
+
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function App() {
@@ -17,7 +20,8 @@ function App() {
     <Route path='/About' exact component={About} />
     <Route path='/Workouts' exact component={Workouts} />
     <Route path='/Login' exact component={Login} />
-    
+    <Route path='/Contact' exact component={Contact} /> 
+    <Route path='/Signup' exact component={Signup} />   
     </Switch>    
     </Router>  
     );

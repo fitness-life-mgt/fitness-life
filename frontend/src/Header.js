@@ -34,9 +34,12 @@ const Header = () => {
                     <div class="col col-lg-2">
                     <div class="text-block">
                         <h2>Get Started with FitnessLife!</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
-                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                        <p>If you’re serious about improving your fitness, there is no better way to make a
+                             commitment than by scheduling a session with our world-class coaching staff.  
+                             With rigorous training and certifications, our staff will create a customized 
+                             fitness program to help you be your best self.  Our staff will evaluate your body
+                              composition, strength, mobility, stamina, speed and nutrition and help you develop 
+                              goals to improve each of them.  The first step is just deciding to start.
                         </p>
                         <button class="button1 " type="button">Join Us Now!</button>
 
@@ -50,9 +53,11 @@ const Header = () => {
                     <div class="col col-lg-2">
                         <div class="text-block2">
                             <h2>Workout at home with ease!</h2>
-                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
-                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                             <p>Looking to work up a sweat?  Cardio machines are among the most popular amenities at our gyms.
+                                   With elliptical machines, treadmills, stationary bikes, stair climbers and more, we have the 
+                                   tools to get your heart rate up and keep it there.   Some of our members use cardio to warm up 
+                                   and others use it to build endurance. Whatever your fitness goals, we’ll help you step it up on 
+                                   top-of-the-line machines.
                              </p>
                              <button class="button1 " type="button">Join Us Now!</button>
 
