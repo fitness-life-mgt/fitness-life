@@ -77,4 +77,70 @@ Router.post("/add", async(req, res) => {
   
 });
 
+Router.get("/get", (req, res) => {
+  var queryParams = req.query;
+  console.log(queryParams);
+  db.query("SELECT * FROM trainer WHERE trainerId = ?", [queryParams.id], (err, result) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.send(result);
+      console.log(result);
+    }
+  });
+});
+
+Router.post("/update", (req, res) => {
+  const tid = req.body.tid;
+  const fName = req.body.fName;
+  const lName = req.body.lName;
+  const email = req.body.email;
+  const salary = req.body.salary;
+
+  console.log(salary);
+
+  db.query(
+    "UPDATE trainer SET firstName=?, lastName=?, email=?, salary=? WHERE trainerId=?",
+    [fName, lName, email, salary, tid],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send("Updated Successfully");
+      }
+    }
+  );
+});
+
+Router.post("/delete", (req, res) => {
+  const tid = req.body.tid;
+  console.log(tid);
+
+  db.query("SELECT appointment.trainerId FROM appointment WHERE appointment.trainerID = ? AND appointment.date > DATE(NOW()) AND apprved = 1", [tid], (err, result) => {
+        if (err) {
+          console.log(err);
+        } else if (result.length >= 1){
+          console.log("Could not delete. Trainer already has upcoming appointments");
+          res.send({
+            message: 'Could not delete. Trainer already has upcoming appointments',
+            type: 'danger',
+         });
+        } else {
+          db.query(
+            "DELETE FROM trainer WHERE trainerId=?", [tid], (err, result) => {
+              if (err) {
+                console.log(err);
+              } else {
+                res.send({
+                  message: 'Trainer Removed Successfully',
+                  type: 'primary',
+               });
+              }
+            }
+          );
+        }
+    });
+  
+});
+
 module.exports = Router;

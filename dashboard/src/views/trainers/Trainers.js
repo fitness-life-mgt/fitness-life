@@ -173,7 +173,7 @@ useEffect(() => {
                       return (
                         <tr>
                           <td>{val.trainerId}</td>
-                          <td>{val.firstName} {val.lastName}</td>
+                          <td><Link to={'/admin/trainer/' + val.trainerId}>{val.firstName + ' ' + val.lastName}</Link></td>
                           <td>{val.email}</td>
                           <td>{val.telephone}</td>
                           <td><i className={atd}></i></td>
