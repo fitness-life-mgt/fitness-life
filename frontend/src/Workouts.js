@@ -83,7 +83,7 @@ const Workouts = () => {
         </div>
     </div>
 </section>
-    <Footer/>
+    
     </>
     )
 }
