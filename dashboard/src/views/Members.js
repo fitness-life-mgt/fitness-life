@@ -10,6 +10,7 @@ import {
 import { useState } from "react";
 import { useEffect } from "react";
 import Axios from "axios";
+import graphGen from "utils/graph";
 import thousands from "../utils/thousands";
 
 function Members() {
@@ -17,6 +18,9 @@ function Members() {
   const [onlineTotalMembers, setOnlineTotalMembers] = useState([]);
   const [physicalTotalMembers, setPhysicalTotalMembers] = useState([]);
   const [physicalNewMembers, setPhysicalNewMembers] = useState([]);
+
+  const [graphPhysical, setGraphPhysical] = useState([]);
+  const [graphOnline, setGraphOnline] = useState([]);
 
   const getPhysicalNewMembers = () => {
     Axios.get("http://localhost:3001/members/physical/new").then((response) => {
@@ -36,10 +40,24 @@ function Members() {
     });
   };
 
+  const getGraphPhysical = () => {
+    Axios.get("http://localhost:3001/members/graphPhysical").then((response) => {
+      setGraphPhysical(response.data);
+    });
+  };
+
+  const getGraphOnline = () => {
+    Axios.get("http://localhost:3001/members/graphOnline").then((response) => {
+      setGraphOnline(response.data);
+    });
+  };
+
   useEffect(() => {
     getPhysicalNewMembers();
     getOnlineTotalMembers();
     getPhysicalTotalMembers();
+    getGraphPhysical();
+    getGraphOnline();
   }, []);
 
 
@@ -181,39 +199,9 @@ function Members() {
                 <div className="ct-chart" id="chartNewGym">
                   <ChartistGraph
                     data={{
-                      labels: [
-                        "14",
-                        "15",
-                        "16",
-                        "17",
-                        "18",
-                        "19",
-                        "20",
-                        "21",
-                        "22",
-                        "23",
-                        "24",
-                        "25",
-                        "26",
-                        "27",
-                      ],
+                      labels: graphGen(graphPhysical)[1],
                       series: [
-                        [
-                          2,
-                          4,
-                          3,
-                          5,
-                          6,
-                          9,
-                          4,
-                          1,
-                          2,
-                          2,
-                          4,
-                          3,
-                          2,
-                          5,
-                        ],
+                        graphGen(graphPhysical)[0],
                       ],
                     }}
                     type="Bar"
@@ -259,39 +247,9 @@ function Members() {
                 <div className="ct-chart" id="chartNewOnline">
                   <ChartistGraph
                     data={{
-                      labels: [
-                        "14",
-                        "15",
-                        "16",
-                        "17",
-                        "18",
-                        "19",
-                        "20",
-                        "21",
-                        "22",
-                        "23",
-                        "24",
-                        "25",
-                        "26",
-                        "27",
-                      ],
+                      labels: graphGen(graphOnline)[1],
                       series: [
-                        [
-                          22,
-                          35,
-                          56,
-                          24,
-                          32,
-                          20,
-                          25,
-                          44,
-                          46,
-                          50,
-                          43,
-                          32,
-                          36,
-                          25,
-                        ],
+                        graphGen(graphOnline)[0],
                       ],
                     }}
                     type="Bar"
@@ -382,72 +340,6 @@ function Members() {
                     options={{
                       low: 0,
                       high: 40,
-                      showArea: false,
-                      height: "245px",
-                      axisX: {
-                        showGrid: false,
-                      },
-                      lineSmooth: false,
-                      showLine: true,
-                      showPoint: true,
-                      fullWidth: true,
-                      chartPadding: {
-                        right: 50,
-                      },
-                    }}
-                    responsiveOptions={[
-                      [
-                        "screen and (max-width: 640px)",
-                        {
-                          seriesBarDistance: 5,
-                          axisX: {
-                            labelInterpolationFnc: function (value) {
-                              return value[0];
-                            },
-                          },
-                        },
-                      ],
-                    ]}
-                  />
-                </div>
-              </Card.Body>
-            </Card>
-          </Col> 
-        </Row>
-        <Row>
-          <Col md="6">
-            <Card>
-              <Card.Header>
-                <Card.Title as="h4">Average Gym Attendance</Card.Title>
-                <p className="card-category">By the day</p>
-              </Card.Header>
-              <Card.Body>
-                <div className="ct-chart" id="chartAttendance">
-                  <ChartistGraph
-                    data={{
-                      labels: [
-                        "Mon",
-                        "Tue",
-                        "Wed",
-                        "Thur",
-                        "Fri",
-                        "Sat",
-                      ],
-                      series: [
-                        [
-                          130,
-                          145,
-                          120,
-                          204,
-                          190,
-                          260,
-                        ],
-                      ],
-                    }}
-                    type="Line"
-                    options={{
-                      low: 0,
-                      high: 300,
                       showArea: false,
                       height: "245px",
                       axisX: {
