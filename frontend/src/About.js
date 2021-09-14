@@ -1,13 +1,15 @@
 import React from 'react';
 import v1 from "./components/image/v1.mp4";
 import  Footer from './Footer';
+import './App.css';
+
 
 
 const About = () => {
     return (
         <>
        <header>
-       <div>
+       
              <div class="overlay"></div>
                 <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
                     <source src={v1} type="video/mp4"/>
@@ -29,9 +31,9 @@ const About = () => {
                     </div>
                     </div>
                 </div>
-        </div>
+        
         </header>       
-     <Footer/>   
+     
 </>
     )
 }

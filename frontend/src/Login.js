@@ -1,167 +1,127 @@
-
+import React from 'react';
 import Footer from './Footer';
 
-import React, { Component } from "react";
-import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
-import CheckButton from "react-validation/build/button";
-
-import AuthService from "./services/auth.service";
-
-const required = value => {
-	if (!value) {
-	  return (
-		<div className="alert alert-danger" role="alert">
-		  This field is required!
-		</div>
-	  );
-	}
-  };
+import { useState } from "react";
+import { useEffect } from "react";
+import Axios from "axios";
+import { Redirect, useHistory } from 'react-router-dom';
 
 
-export default class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.handleLogin = this.handleLogin.bind(this);
-    this.onChangeUsername = this.onChangeUsername.bind(this);
-    this.onChangePassword = this.onChangePassword.bind(this);
+const Login = () => {
 
-    this.state = {
-      username: "",
-      password: "",
-      loading: false,
-      message: ""
-    };
-  }
+	let history =useHistory();
+	
+	const [email, setemail] = useState([]);
+	const [password, setpassword] = useState([]);
+	//const [memberLogError, setmemberLogError] = useState("");
+	
+	const[loginStatus,setLoginStatus]=useState([]);
 
-  onChangeUsername(e) {
-    this.setState({
-      username: e.target.value
-    });
-  }
+	Axios.defaults.withCredentials=true;
 
-  onChangePassword(e) {
-    this.setState({
-      password: e.target.value
-    });
-  }
+	const memberLogged =(e)=>{
+		e.preventDefault();
+		//console.log(process.env.REACT_APP_BASE_URL);
 
-  handleLogin(e) {
-    e.preventDefault();
+		Axios.post("http://localhost:8001/login",{
 
-    this.setState({
-      message: "",
-      loading: true
-    });
+			email:email,
+			password:password,
 
-    this.form.validateAll();
+		  },{headers:{
+			'Content-Type': 'application/json',
+		 }} ).then((response) =>{
+			if(!response.data.error){
+				alert("Successfully Logged In!")
+			}else{
+				console.log("Error!");
+			}
+			    
+			}).catch((error)=>{
+				console.log("The response:",error);
+				//alert(error);
+				alert(error.response.data);
+			});
+		  };
 
-    if (this.checkBtn.context._errors.length === 0) {
-      AuthService.login(this.state.username, this.state.password).then(
-        () => {
-          this.props.history.push("/Profile");
-          window.location.reload();
-        },
-        error => {
-          const resMessage =
-            (error.response &&
-              error.response.data &&
-              error.response.data.message) ||
-            error.message ||
-            error.toString();
+		  //when we refresh the page we need to know we are logged or not 
+		  useEffect(()=>{
+			  Axios.get("http://localhost:8001/login").then((response)=>{
+				  console.log(response);
+			  })
+		  },[])
 
-          this.setState({
-            loading: false,
-            message: resMessage
-          });
-        }
-      );
-    } else {
-      this.setState({
-        loading: false
-      });
-    }
-  }
-
-  render() {
     return (
-
 		<>
     <div className="login-wrapper"> 
-      <div className="container">      
-        <div class="d-flex justify-content-center h-100">
-          <div class="card">
-              <div class="card-header">
-                  <h3>Sign In</h3>
-                  <div class="d-flex justify-content-end social_icon">
-                      <span><i class="fab fa-facebook-square"></i></span>
-                      <span><i class="fab fa-google-plus-square"></i></span>
-                      <span><i class="fab fa-twitter-square"></i></span>
-                  </div>
-              </div>
-              <div class="card-body">
-                <Form onSubmit={this.handleLogin}
-            ref={c => {
-              this.form = c;
-            }}>
-                  <div class="input-group form-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="fas fa-user"></i></span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="username" name="username" value={this.state.username}
-                onChange={this.onChangeUsername}
-                validations={[required]}/>
-                  </div>
-                  <p></p>
-                  <div class="input-group form-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="fas fa-key"></i></span>
-                    </div>
-                    <input type="password" class="form-control" placeholder="password" name="password"
-                value={this.state.password}
-                onChange={this.onChangePassword}
-                validations={[required]}/>
-                  </div>
-                  <p></p>
-                  <div class="row align-items-center remember">
-                    <input type="checkbox"/>Remember Me
-                  </div>
-                  <p></p>
-                  <div class="d-flex justify-content-end form-group2">
-                    <button className="button2" disabled={this.state.loading}>{this.state.loading && (
-                  <span className="spinner-border spinner-border-sm"></span>
-                )}
-                <span>Login</span></button>
-                  </div>
-                  {this.state.message && (
-                  <div className="form-group">
-                    <div className="alert alert-danger" role="alert">
-                      {this.state.message}
-                    </div>
-                  </div>
-                )}
-                <CheckButton
-                  style={{ display: "none" }}
-                  ref={c => {
-                    this.checkBtn = c;
-                  }}
-                />
-                </Form>
-              </div>
-            <div class="card-footer">
-              <div class="d-flex justify-content-center links">
-                Don't have an account?<a href="/Signup">Sign Up</a>
-              </div>
-              <div class="d-flex justify-content-center">
-                <a href="#">Forgot your password?</a>
-              </div>
+        <div className="container">      
+	    <div class="d-flex justify-content-center h-100">
+		<div class="logincard">
+            <div class="logincard-header">
+                <h3>Sign In</h3>
+                    <div class="d-flex justify-content-end social_icon">
+                        <span><i class="fab fa-facebook-square"></i></span>
+                        <span><i class="fab fa-google-plus-square"></i></span>
+                        <span><i class="fab fa-twitter-square"></i></span>
+                     </div>
             </div>
-          </div>
-        </div> 
-      </div>
+			<div class="logincard-body">
+				<form onSubmit={(e)=>{memberLogged(e)}} method ="POST">
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-user"></i></span>
+						</div>
+						<input type="email" 
+						name ="email"
+						className="form-control" 
+						placeholder="Enter Email"
+						required
+						onChange={(e)=>{setemail(e.target.value);}}/>
+						
+					</div>
+					<p></p>
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-key"></i></span>
+						</div>
+						<input 
+						type="password" 
+						className="form-control" 
+						placeholder="Enter Password"
+						required
+						onChange={(e)=>{setpassword(e.target.value);}}
+						/>
+
+					</div>
+					<p></p>
+					<div class="row align-items-center remember">
+						<input type="checkbox"/>Remember Me
+					</div>
+					<p></p>
+					<div class="d-flex justify-content-end form-group2">
+						<input 
+						type="submit" 
+						value="Login" 
+						class="button2"/>
+					</div>
+				</form>
+
+			</div>
+			<div class="logincard-footer">
+				<div class="d-flex justify-content-center links">
+					Don't have an account?<a href="/Signup">Sign Up</a>
+				</div>
+				<div class="d-flex justify-content-center">
+					<a href="#">Forgot your password?</a>
+				</div>
+			</div>
+		</div>
+	</div> 
+</div>
     </div>
-	<Footer/>
-	  </>
-    );
-  }
+	
+	</>
+    )
 }
+
+export default Login

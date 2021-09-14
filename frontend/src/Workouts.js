@@ -1,34 +1,14 @@
+import React from 'react';
 import im3 from "./components/image/im12.jpg";
 import im2 from "./components/image/im11.jpg";
 import im1 from "./components/image/im10.png";
 import v1 from "./components/image/v1.mp4";
 import Footer from './Footer';
 
-import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
-import AuthService from "./services/auth.service";
-
-export default class Workouts extends Component {
-
-    constructor(props) {
-        super(props);
-    
-        this.state = {
-          redirect: null,
-          userReady: false,
-          currentUser: { username: "" }
-        };
-    }
-
-      render() {
-        if (this.state.redirect) {
-            return <Redirect to={this.state.redirect} />
-          }
-      
-        const { currentUser } = this.state;
-
+const Workouts = () => {
     return (
-        <div>
+       
+       <>
             <header>
         <div>
               <div class="overlay"></div>
@@ -103,8 +83,9 @@ export default class Workouts extends Component {
         </div>
     </div>
 </section>
-    <Footer/>
-    </div>
-    );
-    }
+    
+    </>
+    )
 }
+
+export default Workouts;
