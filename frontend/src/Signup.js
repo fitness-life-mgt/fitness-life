@@ -1,242 +1,161 @@
+import React,{useState} from 'react';
 import  Footer from './Footer';
-import React, { Component } from "react";
-import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
-import CheckButton from "react-validation/build/button";
-import { isEmail } from "validator";
 
-import AuthService from "./services/auth.service";
 
-const required = value => {
-	if (!value) {
-	  return (
-		<div className="alert alert-danger" role="alert">
-		  This field is required!
-		</div>
-	  );
-	}
-};
+import Axios from 'axios';
 
-const email = value => {
-	if (!isEmail(value)) {
-	  return (
-		<div className="alert alert-danger" role="alert">
-		  This is not a valid email.
-		</div>
-	  );
-	}
-};
-  
-  const vusername = value => {
-	if (value.length < 3 || value.length > 20) {
-	  return (
-		<div className="alert alert-danger" role="alert">
-		  The username must be between 3 and 20 characters.
-		</div>
-	  );
-	}
-};
-  
-  const vpassword = value => {
-	if (value.length < 6 || value.length > 40) {
-	  return (
-		<div className="alert alert-danger" role="alert">
-		  The password must be between 6 and 40 characters.
-		</div>
-	  );
-	}
-};
-  
-export default class Register extends Component {
-	constructor(props) {
-	  super(props);
-	  this.handleRegister = this.handleRegister.bind(this);
-	  this.onChangeUsername = this.onChangeUsername.bind(this);
-	  this.onChangeEmail = this.onChangeEmail.bind(this);
-	  this.onChangePassword = this.onChangePassword.bind(this);
-  
-	  this.state = {
-		username: "",
-		email: "",
-		password: "",
-		successful: false,
-		message: ""
-	  };
-	}
-  
-	onChangeUsername(e) {
-	  this.setState({
-		username: e.target.value
-	  });
-	}
-  
-	onChangeEmail(e) {
-	  this.setState({
-		email: e.target.value
-	  });
-	}
-  
-	onChangePassword(e) {
-	  this.setState({
-		password: e.target.value
-	  });
-	}
-  
-	handleRegister(e) {
-	  e.preventDefault();
-  
-	  this.setState({
-		message: "",
-		successful: false
-	  });
-  
-	  this.form.validateAll();
-  
-	  if (this.checkBtn.context._errors.length === 0) {
+const Signup = () => {
 
-		//this.props.history.push("/Login");
-		//window.location.reload();
-		AuthService.register(
-		  this.state.username,
-		  this.state.email,
-		  this.state.password
-		).then(
-		  response => {
-			this.setState({
-			  message: response.data.message,
-			  successful: true
-			});
-		  },
-		  error => {
-			const resMessage =
-			  (error.response &&
-				error.response.data &&
-				error.response.data.message) ||
-			  error.message ||
-			  error.toString();
+	const [firstName,setfirstName] = useState ('')
+	const [lastName,setlastName] = useState ('')
+	const [email,setemail] = useState ('')
+	const [password,setpassword] = useState ('')
+	const [cpassword,setcpassword] = useState ('')
   
-			this.setState({
-			  successful: false,
-			  message: resMessage
-			});
-		  }
-		);
-	  }
+	const signupmember =()=>{
 
-	}
-   
-	render() {
-	  return (
+	Axios.post("http://localhost:8001/signup/create", {
+		fName: firstName,
+		lName: lastName,
+		email: email,
+		password: password,
+		cpassword: cpassword,		
+		},{headers:{
+			'Content-Type': 'application/json',
+		 }}).then((response) => {
+			 if(!response.data.error)		
+			{
+				alert("successfully inserted!");		
+				
 
-		<>
-		<div className="workout-wrapper">
-			<div className="container">      
-				<div class="d-flex justify-content-center h-100">
-					<div class="card">
-						<div class="card-header">
-							<h3>Sign Up</h3>
-								<div class="d-flex justify-content-end social_icon">
-									<span><i class="fab fa-facebook-square"></i></span>
-									<span><i class="fab fa-google-plus-square"></i></span>
-									<span><i class="fab fa-twitter-square"></i></span>
-								</div>
+			}else{
+				console.log("Error!");
+			}
+
+		}).catch(error=>{
+			alert(error);
+		})
+  
+	};
+	
+    return (
+        <>
+           <div className="workout-wrapper">
+           <div className="container">      
+	    <div className="d-flex justify-content-center h-100">
+		<div className="logincard">
+            <div className="logincard-header">
+                <h3>Sign Up</h3>
+                    <div className="d-flex justify-content-end social_icon">
+                        <span><i className="fab fa-facebook-square"></i></span>
+                        <span><i className="fab fa-google-plus-square"></i></span>
+                        <span><i className="fab fa-twitter-square"></i></span>
+                     </div>
+            </div>
+			<div className="logincard-body">
+				
+					<div className="input-group form-group">
+						<div className="input-group-prepend">
+							<span className="input-group-text"><i className="fas fa-user"></i></span>
 						</div>
-						<div class="card-body">
-							<Form onSubmit={this.handleRegister}
-						ref={c => {
-							this.form = c;
-						}}>
-							{!this.state.successful && (
-								<div>
-									<div class="input-group form-group">
-										<div class="input-group-prepend">
-											<span class="input-group-text"><i class="fas fa-user"></i></span>
-										</div>
-										<input type="text" class="form-control" placeholder="Username" name="username"
-                    value={this.state.username}
-                    onChange={this.onChangeUsername}
-                    validations={[required, vusername]}/>
-										
-									</div>
-									<p></p>
-									<div class="input-group form-group">
-										<div class="input-group-prepend">
-											<span class="input-group-text"><i class="far fa-user"></i></span>
-										</div>
-										<input type="text" class="form-control" placeholder="Full Name"/>
-										
-									</div>
-									<p></p>
-									<div class="input-group form-group">
-										<div class="input-group-prepend">
-											<span class="input-group-text"><i class="fas fa-envelope-open-text"></i></span>
-										</div>
-										<input type="text" class="form-control" placeholder="Email" name="email"
-                    value={this.state.email}
-                    onChange={this.onChangeEmail}
-                    validations={[required, email]}/>
-										
-									</div>                    
-									<p></p>
-									<div class="input-group form-group">
-										<div class="input-group-prepend">
-											<span class="input-group-text"><i class="fas fa-key"></i></span>
-										</div>
-										<input type="password" class="form-control" placeholder="Password" name="password"
-                    value={this.state.password}
-                    onChange={this.onChangePassword}
-                    validations={[required, vpassword]}/>
-									</div>
-									<p></p>
-									<div class="input-group form-group">
-										<div class="input-group-prepend">
-											<span class="input-group-text"><i class="fas fa-unlock-alt"></i></span>
-										</div>
-										<input type="password" class="form-control" placeholder="Confirm Password"/>
-									</div>
-									<p></p>
-									<div class="row align-items-center remember">
-										<input type="checkbox"/>Remember Me
-									</div>
-									<p></p>
-									<div class="d-flex justify-content-end form-group2">
-									<button className="button2">Sign Up</button>
-									</div>
-								</div>
-								)}
-								{this.state.message && (
-								<div className="form-group">
-								<div
-									className={
-									this.state.successful
-										? "alert alert-success"
-										: "alert alert-danger"
-									}
-									role="alert"
-								>
-									{this.state.message}
-								</div>
-								</div>
-							)}
-							<CheckButton
-								style={{ display: "none" }}
-								ref={c => {
-								this.checkBtn = c;
-								}}
-							/>
-							</Form>
-						</div>
-						<div class="card-footer">
-							<div class="d-flex justify-content-center links">
-								Already have an account?<a href="/Login">Sign In</a>
-							</div>
-						</div>
+						<input 
+						type="text" 
+						className="form-control" 
+						placeholder="First Name"
+						name="firstName"
+						onChange={(e)=>{
+							setfirstName(e.target.value)
+						  }}/>
+						
 					</div>
-				</div> 
-			</div>      
-		</div> 
-     <Footer/>
-		</>
-	  );
-	}
-  }
+					<p></p>
+                    <div className="input-group form-group">
+						<div className="input-group-prepend">
+							<span className="input-group-text"><i className="far fa-user"></i></span>
+						</div>
+						<input 
+						type="text" 
+						name="lastName"
+						className="form-control" 
+						placeholder="Last Name"
+						onChange={(e)=>{
+							setlastName(e.target.value)
+						  }}/>
+						
+					</div>
+					<p></p>
+                    <div className="input-group form-group">
+						<div className="input-group-prepend">
+							<span className="input-group-text"><i className="fas fa-envelope-open-text"></i></span>
+						</div>
+						<input 
+						type="text" 
+						name="email"
+						className="form-control" 
+						placeholder="Email"
+						onChange={(e)=>{
+							setemail(e.target.value)
+						  }}
+						/>
+						
+					</div>                    
+					<p></p>
+					<div className="input-group form-group">
+						<div className="input-group-prepend">
+							<span className="input-group-text"><i className="fas fa-key"></i></span>
+						</div>
+						<input 
+						type="password" 
+						name="password"
+						className="form-control" 
+						placeholder="Password"
+						onChange={(e)=>{
+							setpassword(e.target.value)
+						  }}
+						/>
+					</div>
+					<p></p>
+                    <div className="input-group form-group">
+						<div className="input-group-prepend">
+							<span className="input-group-text"><i className="fas fa-unlock-alt"></i></span>
+						</div>
+						<input 
+						type="password" 
+						className="form-control" 
+						placeholder="Confirm Password"
+						name="cpassword"
+						onChange={(e)=>{
+							setcpassword(e.target.value)
+						  }}
+						/>
+					</div>
+					<p></p>
+					<div className="row align-items-center remember">
+						<input type="checkbox"/>Remember Me
+					</div>
+					<p></p>
+					<div className="d-flex justify-content-end form-group2">
+						<button 
+						className='button1'
+						onClick={signupmember} >Sign up</button>
+					</div>
+				
+
+			</div>
+			<div className="logincard-footer">
+				<div className="d-flex justify-content-center links">
+					Already have an account?<a href="/Login">Sign In</a>
+				</div>
+				</div>
+		</div>
+	</div> 
+</div>   
+               
+            </div> 
+   
+ </>
+    )
+}
+
+export default Signup
+
