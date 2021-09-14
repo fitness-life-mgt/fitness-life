@@ -1,73 +1,149 @@
-import React from 'react';
+import React,{useState} from 'react';
 import  Footer from './Footer';
 
+
+import Axios from 'axios';
+
 const Signup = () => {
+
+	const [firstName,setfirstName] = useState ('')
+	const [lastName,setlastName] = useState ('')
+	const [email,setemail] = useState ('')
+	const [password,setpassword] = useState ('')
+	const [cpassword,setcpassword] = useState ('')
+  
+	const signupmember =()=>{
+
+	Axios.post("http://localhost:8001/signup/create", {
+		fName: firstName,
+		lName: lastName,
+		email: email,
+		password: password,
+		cpassword: cpassword,		
+		},{headers:{
+			'Content-Type': 'application/json',
+		 }}).then((response) => {
+			 if(!response.data.error)		
+			{
+				alert("successfully inserted!");		
+				
+
+			}else{
+				console.log("Error!");
+			}
+
+		}).catch(error=>{
+			alert(error);
+		})
+  
+	};
+	
     return (
         <>
            <div className="workout-wrapper">
            <div className="container">      
-	    <div class="d-flex justify-content-center h-100">
-		<div class="card">
-            <div class="card-header">
+	    <div className="d-flex justify-content-center h-100">
+		<div className="logincard">
+            <div className="logincard-header">
                 <h3>Sign Up</h3>
-                    <div class="d-flex justify-content-end social_icon">
-                        <span><i class="fab fa-facebook-square"></i></span>
-                        <span><i class="fab fa-google-plus-square"></i></span>
-                        <span><i class="fab fa-twitter-square"></i></span>
+                    <div className="d-flex justify-content-end social_icon">
+                        <span><i className="fab fa-facebook-square"></i></span>
+                        <span><i className="fab fa-google-plus-square"></i></span>
+                        <span><i className="fab fa-twitter-square"></i></span>
                      </div>
             </div>
-			<div class="card-body">
-				<form>
-					<div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-user"></i></span>
+			<div className="logincard-body">
+				
+					<div className="input-group form-group">
+						<div className="input-group-prepend">
+							<span className="input-group-text"><i className="fas fa-user"></i></span>
 						</div>
-						<input type="text" class="form-control" placeholder="First Name"/>
+						<input 
+						type="text" 
+						className="form-control" 
+						placeholder="First Name"
+						name="firstName"
+						onChange={(e)=>{
+							setfirstName(e.target.value)
+						  }}/>
 						
 					</div>
 					<p></p>
-                    <div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="far fa-user"></i></span>
+                    <div className="input-group form-group">
+						<div className="input-group-prepend">
+							<span className="input-group-text"><i className="far fa-user"></i></span>
 						</div>
-						<input type="text" class="form-control" placeholder="Last Name"/>
+						<input 
+						type="text" 
+						name="lastName"
+						className="form-control" 
+						placeholder="Last Name"
+						onChange={(e)=>{
+							setlastName(e.target.value)
+						  }}/>
 						
 					</div>
 					<p></p>
-                    <div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-envelope-open-text"></i></span>
+                    <div className="input-group form-group">
+						<div className="input-group-prepend">
+							<span className="input-group-text"><i className="fas fa-envelope-open-text"></i></span>
 						</div>
-						<input type="text" class="form-control" placeholder="Email"/>
+						<input 
+						type="text" 
+						name="email"
+						className="form-control" 
+						placeholder="Email"
+						onChange={(e)=>{
+							setemail(e.target.value)
+						  }}
+						/>
 						
 					</div>                    
 					<p></p>
-					<div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-key"></i></span>
+					<div className="input-group form-group">
+						<div className="input-group-prepend">
+							<span className="input-group-text"><i className="fas fa-key"></i></span>
 						</div>
-						<input type="password" class="form-control" placeholder="Password"/>
+						<input 
+						type="password" 
+						name="password"
+						className="form-control" 
+						placeholder="Password"
+						onChange={(e)=>{
+							setpassword(e.target.value)
+						  }}
+						/>
 					</div>
 					<p></p>
-                    <div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-unlock-alt"></i></span>
+                    <div className="input-group form-group">
+						<div className="input-group-prepend">
+							<span className="input-group-text"><i className="fas fa-unlock-alt"></i></span>
 						</div>
-						<input type="password" class="form-control" placeholder="Confirm Password"/>
+						<input 
+						type="password" 
+						className="form-control" 
+						placeholder="Confirm Password"
+						name="cpassword"
+						onChange={(e)=>{
+							setcpassword(e.target.value)
+						  }}
+						/>
 					</div>
 					<p></p>
-					<div class="row align-items-center remember">
+					<div className="row align-items-center remember">
 						<input type="checkbox"/>Remember Me
 					</div>
 					<p></p>
-					<div class="d-flex justify-content-end form-group2">
-						<input type="submit" value="Sign Up" class="button2"/>
+					<div className="d-flex justify-content-end form-group2">
+						<button 
+						className='button1'
+						onClick={signupmember} >Sign up</button>
 					</div>
-				</form>
+				
 
 			</div>
-			<div class="card-footer">
-				<div class="d-flex justify-content-center links">
+			<div className="logincard-footer">
+				<div className="d-flex justify-content-center links">
 					Already have an account?<a href="/Login">Sign In</a>
 				</div>
 				</div>
@@ -76,9 +152,10 @@ const Signup = () => {
 </div>   
                
             </div> 
-     <Footer/>
+   
  </>
     )
 }
 
 export default Signup
+
