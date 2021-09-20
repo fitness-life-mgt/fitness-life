@@ -357,3 +357,24 @@ th.h1, td.t1 {
   padding: 5px;
   text-align: left;
 }
+.button11{
+    transition-duration: 0.4s;
+    background-color: #0b1d2f; /* Green */
+    border: none;
+    color: #f58a07;  
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: 500;
+    padding: 5px 15px;
+    
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 12px;
+    align-items: center;
+  }
+  
+  .button11:hover {
+    background-color: #084887; /* Green */
+    color: white;
+  }
