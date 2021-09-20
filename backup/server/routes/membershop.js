@@ -48,21 +48,36 @@ Router.get("/equipments", (req, res) => {
   });
 });
 
+Router.post("/addtocart", (req, res) => {
+  
+  const ProId= req.body.productID;
+  let Odate = new Date();
+  
+  db.query(
+    "SELECT email FROM member WHERE firstName='Rusiru'",(eerr,remail)=>{
+      if(eerr){
+        console.log(eerr);
+      }else{
+        var Oemail =remail[0].email;
+        db.query(
+          "INSERT INTO order(orderDate,productID,email,quantity) VALUES(?,?,?,?) ",
+          [Odate,ProId,Oemail,Oqty],
+          (err,result)=>{
+              if(err){
+                  console.log(err);
+              }else{
+                  res.send("Added to the Cart!.");
+              }
+          }
+      );
+      }
+    }
+  );
 
-// Router.get("/popup",(req, res) => {
-//   // 1-sportswears 2-suppliemnts 3-equipments
-//   const proId =req.body.productID;
-//   db.query(
-//       "SELECT * FROM product WHERE productID = proId", 
-//       (err, result) => {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       res.send(result);
-//       //console.log(result);
-//     }
-//   });
-// });
+
+
+  
+});
 
 
 
