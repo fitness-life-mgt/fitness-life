@@ -58,18 +58,35 @@ Router.post("/addtocart", (req, res) => {
       if(eerr){
         console.log(eerr);
       }else{
-        var Oemail =remail[0].email;
-        db.query(
-          "INSERT INTO order(orderDate,productID,email,quantity) VALUES(?,?,?,?) ",
-          [Odate,ProId,Oemail,Oqty],
-          (err,result)=>{
-              if(err){
-                  console.log(err);
-              }else{
-                  res.send("Added to the Cart!.");
+        
+          db.query(
+            "SELECT * FROM wishlist WHERE productID=?",ProId,(err1,result1)=>{
+              if(err1){
+                console.log(err1);
+              }else{ 
+                          
+                if(result1.length>0){
+
+                  res.send("Item has been already added to the cart!.")                  
+                
+                }else{
+                  var Oemail =remail[0].email;
+                    db.query(
+                      "INSERT INTO wishlist(orderDate,productID,email,qty) VALUES(?,?,?,?) ",
+                      [Odate,ProId,Oemail,1],
+                      (err,result)=>{
+                          if(err){
+                              console.log(err);
+                          }else{
+                              res.send("Added to the Cart!.");
+                          }
+                      }
+                  );
+                }
               }
-          }
-      );
+            }
+          );
+
       }
     }
   );
