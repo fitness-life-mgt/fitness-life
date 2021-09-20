@@ -5,11 +5,39 @@ import im1 from "./components/image/im10.png";
 import v1 from "./components/image/v1.mp4";
 import Footer from './Footer';
 
+import Axios from 'axios';
+
 const Workouts = () => {
+
+    const enrollbeginer =()=>{
+
+        Axios.post("http://localhost:8001/workouts/beginner",{
+
+		  },{headers:{
+			'Content-Type': 'application/json',
+		 }} ).then((response) =>{
+			if(!response.data.error){
+				alert(response.data);
+				
+				
+			}else{
+				console.log("Error!");
+			}
+			    
+			}).catch((error)=>{
+				console.log("The response:",error);
+				//alert(error);				
+				//alert(error.response.data);
+			});
+ 
+    };
+
+  
+
     return (
        
        <>
-            <header>
+        <header>
         <div>
               <div class="overlay"></div>
                  <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
@@ -51,7 +79,7 @@ const Workouts = () => {
                             <div className="d-flex justify-content-end form-group2">						                        
                                     <button 
                                         className='button10'
-                                        >Enroll</button>    
+                                        onClick={enrollbeginer}>Enroll</button>    
                             </div>
                              
                     </div>
