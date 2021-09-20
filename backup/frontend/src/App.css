@@ -57,6 +57,27 @@ nav ul li{
   color: white;
 }
 
+.button152 {
+  transition-duration: 0.4s;
+  background-color: #084887; /* Green */
+  border: none;
+  color: white;  
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-weight: 500;
+  padding: 10px 30px;
+  margin: right 10px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 12px;
+  align-items: center;
+}
+
+.button152:hover {
+  background-color: #F58A07; /* Green */
+  color: white;
+}
 /**************************************HEADER***********************************************/
 .header-wrapper{
   position: relative;
