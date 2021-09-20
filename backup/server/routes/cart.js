@@ -58,8 +58,33 @@ Router.get("/totprice",(req,res)=>{
       );
    });
 
+//delete item
+   Router.post("/deleteitem", (req, res) => {
+  
+    const proId= req.body.productID;
 
-
+    db.query(
+        "SELECT email FROM member WHERE firstName='Rusiru'",(eerr,remail)=>{ 
+          if(eerr){
+            console.log(eerr);
+          }else{
+            var mememail =remail[0].email;
+            db.query(
+                "DELETE FROM wishlist WHERE email=? AND productID=?",
+                [mememail,proId],
+                (err, result) => {
+                if (err) {
+                console.log(err);
+                } 
+                else {
+                res.send("Item removed successfully!.");
+               // console.log(result);
+              }
+              });
+          }
+        }
+      );
+});
 
 
 
