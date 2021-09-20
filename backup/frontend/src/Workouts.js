@@ -56,6 +56,29 @@ const Workouts = () => {
     };
 
 
+    const enrolladvanced =()=>{
+
+        Axios.post("http://localhost:8001/workouts/advanced",{
+
+		  },{headers:{
+			'Content-Type': 'application/json',
+		 }} ).then((response) =>{
+			if(!response.data.error){
+				alert(response.data);
+				
+				
+			}else{
+				console.log("Error!");
+			}
+			    
+			}).catch((error)=>{
+				console.log("The response:",error);
+				//alert(error);				
+				//alert(error.response.data);
+			});
+ 
+    };
+
     return (
        
        <>
@@ -120,7 +143,7 @@ const Workouts = () => {
                             <div className="d-flex justify-content-end form-group2">						                        
                                     <button 
                                         className='button10'
-                                        >Enroll</button>    
+                                        onClick={enrollintermediate}>Enroll</button>    
                             </div>                           
                     </div>
                 </div>
@@ -138,7 +161,7 @@ const Workouts = () => {
                             <div className="d-flex justify-content-end form-group2">						                        
                                     <button 
                                         className='button10'
-                                        >Enroll</button>    
+                                        onClick={enrolladvanced}>Enroll</button>    
                             </div>                            
                     </div>
                 </div>
