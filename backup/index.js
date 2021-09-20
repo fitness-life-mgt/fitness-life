@@ -20,6 +20,7 @@ var loginRoutes = require('./routes/login')
 var updateprofileRoutes = require('./routes/updateprofile')
 var membershopRoutes = require('./routes/membershop')
 var profileRoutes =require('./routes/profile')
+var workoutsRoutes =require('./routes/workouts')
 
 
 
@@ -53,7 +54,7 @@ app.use("/login", loginRoutes);
 app.use("/updateprofile", updateprofileRoutes);
 app.use("/membershop",membershopRoutes);
 app.use("/profile",profileRoutes);
-
+app.use("/workouts",workoutsRoutes);
 
 app.listen(8001, () => {
   console.log("Yey, your server is running on port 8001");
