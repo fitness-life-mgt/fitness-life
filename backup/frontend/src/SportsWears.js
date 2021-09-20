@@ -10,7 +10,7 @@ export const SportsWears = () => {
 
     const [info, setInfo] = useState([]);
 
-    // const [productID, setproductID] = useState([]);
+     const [productID, setproductID] = useState([]);
     // const [productName, setproductName] = useState([]);
     // const [price, setprice] = useState([]);
     // const [description, setdescription] = useState([]);
@@ -30,6 +30,33 @@ export const SportsWears = () => {
         getInfo();
       }, []);
 
+      const addtocartproduct =(proId)=>{
+
+        Axios.post("http://localhost:8001/membershop/addtocart",{            
+            productID:proId,
+
+        },{headers:{
+             'Content-Type': 'application/json',
+         }}).then((response) => {
+             if(!response.data.error)		
+            {
+                alert("Added to the cart!.");   	
+ 
+            }else{
+                console.log("Error!");
+            }
+ 
+        }).catch(error=>{
+            alert(error);
+        })
+ 
+     };  
+
+    
+   
+   
+    
+    
     return (
         <>
         <div className="line2"></div> 
@@ -72,9 +99,10 @@ export const SportsWears = () => {
                                             <div class="product-content">                            
                                             <h3 class="title">
                                                 <a class="btn3 warning" id="myBtn" href="#popup">{val.productName} </a></h3>
-                                            <div class="price">{val.price}
+                                            <div class="price">Rs {val.price}.00 /=
                                                 </div>
-                                            <a class="add-to-cart" href="">+ Add To Cart</a>
+                                            <button class="button11" 
+                                            onClick={()=>addtocartproduct(val.productID)}>+ Add To Cart</button>
                                         </div>                                                                  
                                                         
                    </div>
