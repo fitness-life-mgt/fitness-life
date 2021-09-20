@@ -32,7 +32,29 @@ const Workouts = () => {
  
     };
 
-  
+    const enrollintermediate =()=>{
+
+        Axios.post("http://localhost:8001/workouts/intermediate",{
+
+		  },{headers:{
+			'Content-Type': 'application/json',
+		 }} ).then((response) =>{
+			if(!response.data.error){
+				alert(response.data);
+				
+				
+			}else{
+				console.log("Error!");
+			}
+			    
+			}).catch((error)=>{
+				console.log("The response:",error);
+				//alert(error);				
+				//alert(error.response.data);
+			});
+ 
+    };
+
 
     return (
        
