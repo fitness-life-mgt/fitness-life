@@ -30,6 +30,27 @@ export const Equipments = () => {
         getInfo();
       }, []);  
 
+      const addtocartproduct =(proId)=>{
+
+        Axios.post("http://localhost:8001/membershop/addtocart",{            
+            productID:proId,
+
+        },{headers:{
+             'Content-Type': 'application/json',
+         }}).then((response) => {
+             if(!response.data.error)		
+            {
+                alert("Added to the cart!.");   	
+ 
+            }else{
+                console.log("Error!");
+            }
+ 
+        }).catch(error=>{
+            alert(error);
+        })
+ 
+     };  
 
     return (
         <>
@@ -75,7 +96,8 @@ export const Equipments = () => {
                                                 <a class="btn3 warning" id="myBtn" href="#popup">{val.productName} </a></h3>
                                             <div class="price">Rs.{val.price}.00 /=
                                                 </div>
-                                            <a class="add-to-cart" href="">+ Add To Cart</a>
+                                                <button class="button11" 
+                                            onClick={()=>addtocartproduct(val.productID)}>+ Add To Cart</button>
                                         </div>                                                                  
                                                         
                    </div>           
