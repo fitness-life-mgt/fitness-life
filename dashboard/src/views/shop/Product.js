@@ -60,7 +60,7 @@ function Product() {
     formData.append('file', file);
 
     try {
-      const res = await Axios.post('http://localhost:3001/file/upload', formData, {
+      const res = await Axios.post('https://fitness-life-server.herokuapp.com/file/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         },
@@ -90,7 +90,7 @@ function Product() {
 
   // Get Product Information
   const getInfo = () => {
-    Axios.get(`http://localhost:3001/product/get?id=${id}`).then((response) => {
+    Axios.get(`https://fitness-life-server.herokuapp.com/product/get?id=${id}`).then((response) => {
       setInfo(response.data);
       setPName(response.data[0].productName);
       setPDesc(response.data[0].description);
@@ -101,7 +101,7 @@ function Product() {
   };
 
   const getDir = () => {
-    Axios.get(`http://localhost:3001/file/dir`).then((response) => {
+    Axios.get(`https://fitness-life-server.herokuapp.com/file/dir`).then((response) => {
       setDir(response.data);
     });
   };
@@ -112,7 +112,7 @@ function Product() {
 
       try {
 
-        Axios.post("http://localhost:3001/product/update", {
+        Axios.post("https://fitness-life-server.herokuapp.com/product/update", {
           pid: id,
           pName: pName,
           pDesc: pDesc,
@@ -139,7 +139,7 @@ function Product() {
 
     try {
 
-      Axios.post("http://localhost:3001/product/delete", {
+      Axios.post("https://fitness-life-server.herokuapp.com/product/delete", {
         pid: id,
       })
 

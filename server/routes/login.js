@@ -2,8 +2,17 @@ const express = require("express");
 const Router = express.Router();
 var db = require('../config/connection');
 
-const bycrypt=require('bcrypt');
+const bcrypt=require('bcrypt');
 const  saltRounds=10;
+
+Router.get("/admin", (req, res) => {
+  if (req.session.user) {
+    res.send({ loggedIn: true, user: req.session.user });
+  } else {
+    res.send({ loggedIn: false });
+  }
+});
+
 
 Router.post("/", (req, res) => {
     const email =req.body.email;
@@ -57,16 +66,44 @@ Router.post("/", (req, res) => {
                         }
                       }
                     );
-                
-    
-              }
-              
-            
+              }     
     });
-
-
-
-
-
 });
+
+
+Router.post("/admin", (req, res) => {
+  const username = req.body.username;
+  const password = req.body.password;
+
+  db.query(
+    "SELECT * FROM administrator WHERE username = ?;",
+    username,
+    (err, result) => {
+      if (err) {
+        res.send({ err: err });
+      }
+
+      if (result.length > 0) {
+        bcrypt.compare(password, result[0].password, (error, response) => {
+          if (response) {
+            req.session.user = result;
+            console.log(req.session.user);
+            res.send(result);
+          } else {
+            res.send({ message: "Wrong username/password combination!" });
+          }
+        });
+      } else {
+        res.send({ message: "User doesn't exist" });
+      }
+    }
+  );
+});
+
+Router.post("/admin-logout", (req, res) => {
+  req.session.user = [];
+});
+
+
+
 module.exports = Router;

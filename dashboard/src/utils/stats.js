@@ -7,7 +7,7 @@ function memberPercentage(online,physical){
     }else if(physical == 0){
         return 0;
     }else{
-        return (online/total)*100;
+        return ((online/total)*100).toFixed(2);
     } 
 }
 

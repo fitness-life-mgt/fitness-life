@@ -14,7 +14,7 @@ const Signup = () => {
   
 	const signupmember =()=>{
 
-	Axios.post("http://localhost:8001/signup/create", {
+	Axios.post("https://fitness-life-server.herokuapp.com/signup/create", {
 		fName: firstName,
 		lName: lastName,
 		email: email,

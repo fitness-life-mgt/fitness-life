@@ -45,7 +45,7 @@ function Trainer() {
 
     // Get Trainer Information
     const getInfo = () => {
-      Axios.get(`http://localhost:3001/trainers/get?id=${id}`).then((response) => {
+      Axios.get(`https://fitness-life-server.herokuapp.com/trainers/get?id=${id}`).then((response) => {
         setInfo(response.data);
         setFName(response.data[0].firstName);
         setLName(response.data[0].lastName);
@@ -60,7 +60,7 @@ function Trainer() {
   
         try {
   
-          Axios.post("http://localhost:3001/trainers/update", {
+          Axios.post("https://fitness-life-server.herokuapp.com/trainers/update", {
             tid: id,
             fName: fName,
             lName: lName,
@@ -88,7 +88,7 @@ function Trainer() {
 
       try {
   
-        Axios.post("http://localhost:3001/trainers/delete", {
+        Axios.post("https://fitness-life-server.herokuapp.com/trainers/delete", {
           tid: id,
         }).then((response => {
           setAddMessage({msg: response.data.message, type: response.data.type});

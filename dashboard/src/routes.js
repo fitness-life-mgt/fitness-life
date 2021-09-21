@@ -1,6 +1,6 @@
 import Dashboard from "views/Dashboard.js";
 import Payments from "views/Payments.js";
-import Members from "views/Members.js";
+import Members from "views/members/Members.js";
 import Trainers from "views/trainers/Trainers.js";
 import Shop from "views/shop/Shop.js";
 import Settings from "views/Settings.js";

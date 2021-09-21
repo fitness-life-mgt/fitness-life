@@ -17,7 +17,7 @@ function Payments() {
   const [payroll, setPayroll] = useState([]);
 
   const getPayroll = () => {
-    Axios.get("http://localhost:3001/payments/payroll").then((response) => {
+    Axios.get("https://fitness-life-server.herokuapp.com/payments/payroll").then((response) => {
       setPayroll(response.data);
       console.log(response.data);
     });

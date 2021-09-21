@@ -44,7 +44,7 @@ function ProductAddNew() {
     formData.append('file', file);
 
     try {
-      const res = await Axios.post('http://localhost:3001/file/upload', formData, {
+      const res = await Axios.post('https://fitness-life-server.herokuapp.com/file/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         },
@@ -81,7 +81,7 @@ function ProductAddNew() {
     }else{
       try {
 
-        Axios.post("http://localhost:3001/product/add", {
+        Axios.post("https://fitness-life-server.herokuapp.com/product/add", {
           pName: pName,
           pDesc: pDesc,
           pQuantity: pQuantity,

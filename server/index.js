@@ -17,15 +17,16 @@ var UploadRoutes = require('./routes/fileupload')
 var ProductRoutes = require('./routes/products')
 var signupRoutes = require('./routes/signup')
 var loginRoutes = require('./routes/login')
+var resetRoutes = require('./routes/reset')
 
-
-
-app.use(express.json());
 app.use(cors({
-    origin:["http://localhost:3000"],
-    methods:["GET","POST"],
-    credentials:true
-  }));
+  origin:["https://fitness-life-dashboard.herokuapp.com"],
+  methods:["GET","POST"],
+  credentials:true
+}));
+app.use(express.json());
+app.use(fileUpload());
+
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(
@@ -39,8 +40,6 @@ app.use(
   })
 );
 
-app.use(fileUpload());
-
 app.use("/orders", ShopRoutes);
 app.use("/payments", PaymentRoutes);
 app.use("/trainers", TrainersRoutes);
@@ -49,8 +48,10 @@ app.use("/file", UploadRoutes);
 app.use("/product", ProductRoutes);
 app.use("/signup", signupRoutes);
 app.use("/login", loginRoutes);
+app.use("/reset", resetRoutes);
 
+const port = process.env.PORT || 8001;
 
-app.listen(8001, () => {
-  console.log("Yey, your server is running on port 8001");
+app.listen(port, () => {
+  console.log(`Your server is running on port ${port}`);
 });

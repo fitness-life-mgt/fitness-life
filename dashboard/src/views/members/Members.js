@@ -11,7 +11,6 @@ import { useState } from "react";
 import { useEffect } from "react";
 import Axios from "axios";
 import graphGen from "utils/graph";
-import thousands from "../utils/thousands";
 
 function Members() {
 
@@ -23,31 +22,31 @@ function Members() {
   const [graphOnline, setGraphOnline] = useState([]);
 
   const getPhysicalNewMembers = () => {
-    Axios.get("http://localhost:3001/members/physical/new").then((response) => {
+    Axios.get("https://fitness-life-server.herokuapp.com/members/physical/new").then((response) => {
       setPhysicalNewMembers(response.data);
     });
   };
 
   const getOnlineTotalMembers = () => {
-    Axios.get("http://localhost:3001/members/online/total").then((response) => {
+    Axios.get("https://fitness-life-server.herokuapp.com/members/online/total").then((response) => {
       setOnlineTotalMembers(response.data);
     });
   };
 
   const getPhysicalTotalMembers = () => {
-    Axios.get("http://localhost:3001/members/physical/total").then((response) => {
+    Axios.get("https://fitness-life-server.herokuapp.com/members/physical/total").then((response) => {
       setPhysicalTotalMembers(response.data);
     });
   };
 
   const getGraphPhysical = () => {
-    Axios.get("http://localhost:3001/members/graphPhysical").then((response) => {
+    Axios.get("https://fitness-life-server.herokuapp.com/members/graphPhysical").then((response) => {
       setGraphPhysical(response.data);
     });
   };
 
   const getGraphOnline = () => {
-    Axios.get("http://localhost:3001/members/graphOnline").then((response) => {
+    Axios.get("https://fitness-life-server.herokuapp.com/members/graphOnline").then((response) => {
       setGraphOnline(response.data);
     });
   };

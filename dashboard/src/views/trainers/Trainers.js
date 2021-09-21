@@ -22,19 +22,19 @@ function Trainers() {
   const [appointments, setAppointments] = useState([]);
 
 const getAttendance = () => {
-  Axios.get("http://localhost:3001/trainers/attendance").then((response) => {
+  Axios.get("https://fitness-life-server.herokuapp.com/trainers/attendance").then((response) => {
     setAttendance(response.data);
   });
 };
 
 const getTotalTrainers = () => {
-  Axios.get("http://localhost:3001/trainers/total").then((response) => {
+  Axios.get("https://fitness-life-server.herokuapp.com/trainers/total").then((response) => {
     setTotalTrainers(response.data);
   });
 };
 
 const getAppointments = () => {
-  Axios.get("http://localhost:3001/trainers/appointments").then((response) => {
+  Axios.get("https://fitness-life-server.herokuapp.com/trainers/appointments").then((response) => {
     setAppointments(response.data);
   });
 };

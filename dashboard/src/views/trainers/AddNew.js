@@ -40,7 +40,7 @@ function TrainerAddNew() {
     if(passwordErr == 0){
       try {
 
-        Axios.post("http://localhost:3001/trainers/add", {
+        Axios.post("https://fitness-life-server.herokuapp.com/trainers/add", {
           fName: fName,
           lName: lName,
           email: email,
