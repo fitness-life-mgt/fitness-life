@@ -23,7 +23,7 @@ const Login = () => {
 		e.preventDefault();
 		//console.log(process.env.REACT_APP_BASE_URL);
 
-		Axios.post("http://localhost:8001/login",{
+		Axios.post("https://fitness-life-server.herokuapp.com/login",{
 
 			email:email,
 			password:password,
@@ -46,7 +46,7 @@ const Login = () => {
 
 		  //when we refresh the page we need to know we are logged or not 
 		  useEffect(()=>{
-			  Axios.get("http://localhost:8001/login").then((response)=>{
+			  Axios.get("https://fitness-life-server.herokuapp.com/login").then((response)=>{
 				  console.log(response);
 			  })
 		  },[])

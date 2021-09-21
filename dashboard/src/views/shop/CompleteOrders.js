@@ -19,7 +19,7 @@ function CompleteOrders() {
   const [cOrderList, setCOrderList] = useState([]);
 
   const getCOrders = () => {
-    Axios.get("http://localhost:3001/orders/complete").then((response) => {
+    Axios.get("https://fitness-life-server.herokuapp.com/orders/complete-all").then((response) => {
       setCOrderList(response.data);
       console.log(response.data);
     });
@@ -42,11 +42,10 @@ function CompleteOrders() {
                 <Table className="table-hover">
                   <thead>
                     <tr>
-                      <th className="border-0">Ordeer ID</th>
-                      <th className="border-0">Product Name</th>
-                      <th className="border-0">Price</th>
-                      <th className="border-0">Quantity</th>
-                      <th className="border-0">Total</th>
+                      <th className="border-0">Order ID</th>
+                      <th className="border-0">Customer Email</th>
+                      <th className="border-0">Order Date</th>
+                      <th className="border-0">Total Price</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -54,10 +53,9 @@ function CompleteOrders() {
                       return (
                         <tr>
                           <td>{val.orderID}</td>
-                          <td>{val.productName}</td>
-                          <td>{val.price}</td>
-                          <td>{val.quantity}</td>
-                          <td>{val.price * val.quantity}</td>
+                          <td>{val.email}</td>
+                          <td>{val.orderDate}</td>
+                          <td>{val.amount}</td>
                         </tr>
                       );
                     })}

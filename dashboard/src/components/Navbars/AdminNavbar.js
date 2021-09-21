@@ -1,11 +1,13 @@
 import React, { Component } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import { Navbar, Container, Nav, Dropdown, Button } from "react-bootstrap";
 
 import routes from "routes.js";
 
 function Header() {
   const location = useLocation();
+  const history = useHistory();
+
   const mobileSidebarToggle = (e) => {
     e.preventDefault();
     document.documentElement.classList.toggle("nav-open");
@@ -18,14 +20,9 @@ function Header() {
     document.body.appendChild(node);
   };
 
-  const getBrandText = () => {
-    for (let i = 0; i < routes.length; i++) {
-      if (location.pathname.indexOf(routes[i].layout + routes[i].path) !== -1) {
-        return routes[i].name;
-      }
-    }
-    return "Brand";
-  };
+  function logout(){
+  }
+
   return (
     <Navbar bg="light" expand="lg">
       <Container fluid>
@@ -37,13 +34,6 @@ function Header() {
           >
             <i className="fas fa-ellipsis-v"></i>
           </Button>
-          <Navbar.Brand
-            href="#home"
-            onClick={(e) => e.preventDefault()}
-            className="mr-2"
-          >
-            {getBrandText()}
-          </Navbar.Brand>
         </div>
         <Navbar.Toggle aria-controls="basic-navbar-nav" className="mr-2">
           <span className="navbar-toggler-bar burger-lines"></span>
@@ -51,46 +41,6 @@ function Header() {
           <span className="navbar-toggler-bar burger-lines"></span>
         </Navbar.Toggle>
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="nav mr-auto" navbar>
-            <Dropdown as={Nav.Item}>
-              <Dropdown.Toggle
-                as={Nav.Link}
-                data-toggle="dropdown"
-                id="dropdown-67443507"
-                variant="default"
-                className="m-0"
-              >
-                <i className="far fa-bell"></i>
-                <span className="notification">4</span>
-                <span className="d-lg-none ml-1">Notification</span>
-              </Dropdown.Toggle>
-              <Dropdown.Menu>
-                <Dropdown.Item
-                  href="#"
-                  onClick={(e) => e.preventDefault()}
-                >
-                  New Order
-                </Dropdown.Item>
-                <Dropdown.Item
-                  href="#"
-                  onClick={(e) => e.preventDefault()}
-                >
-                  Shipment Pending
-                </Dropdown.Item>
-                <Dropdown.Item
-                  href="#"
-                  onClick={(e) => e.preventDefault()}
-                >
-                  Shipment Pending
-                </Dropdown.Item>
-                <Dropdown.Item
-                  href="#"
-                >
-                  Payroll Pending
-                </Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-          </Nav>
           <Nav className="ml-auto" navbar>
           <Nav.Item>
               <Nav.Link
@@ -120,14 +70,12 @@ function Header() {
                 </Dropdown.Item>
                 <div className="divider"></div>
                 <Dropdown.Item
-                  href="#pablo"
-                  onClick={(e) => e.preventDefault()}
+                onClick={logout}
                 >
                   Log Out
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
-            
           </Nav>
         </Navbar.Collapse>
       </Container>

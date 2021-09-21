@@ -15,7 +15,7 @@ ReactDOM.render(
     <Switch>
       <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
       <Route path="/misc" render={(props) => <MiscLayout {...props} />} />
-      <Redirect from="/" to="/admin/dashboard" />
+      <Redirect from="/" to="/misc/login" />
     </Switch>
   </BrowserRouter>,
   document.getElementById("root")

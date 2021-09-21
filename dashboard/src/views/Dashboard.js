@@ -24,61 +24,68 @@ function Dashboard() {
   const [onlineTotalMembers, setOnlineTotalMembers] = useState([]);
   const [physicalTotalMembers, setPhysicalTotalMembers] = useState([]);
   const [newGraph, setNewGraph] = useState([]);
-  const [newRevenueGraph, setRevenueGraph] = useState([]);
+  const [shopRevenueGraph, setShopRevenueGraph] = useState([]);
+  const [gymRevenueGraph, setGymRevenueGraph] = useState([]);
   const [salesGraph, setSalesGraph] = useState([]);
 
   const perc = [];
 
   const getNewOrders = () => {
-    Axios.get("http://localhost:3001/orders/new").then((response) => {
+    Axios.get("https://fitness-life-server.herokuapp.com/orders/new").then((response) => {
       setNewOrderList(response.data);
     });
   };
 
   const getRevenue = () => {
-    Axios.get("http://localhost:3001/orders/revenue").then((response) => {
+    Axios.get("https://fitness-life-server.herokuapp.com/orders/revenue").then((response) => {
       setRevenue(response.data);
     });
   };
 
   const getNewMembers = () => {
-    Axios.get("http://localhost:3001/members/new").then((response) => {
+    Axios.get("https://fitness-life-server.herokuapp.com/members/new").then((response) => {
       setNewMembers(response.data);
     });
   };
 
   const getTotalMembers = () => {
-    Axios.get("http://localhost:3001/members/total").then((response) => {
+    Axios.get("https://fitness-life-server.herokuapp.com/members/total").then((response) => {
       setTotalMembers(response.data);
     });
   };
 
   const getOnlineTotalMembers = () => {
-    Axios.get("http://localhost:3001/members/online/total").then((response) => {
+    Axios.get("https://fitness-life-server.herokuapp.com/members/online/total").then((response) => {
       setOnlineTotalMembers(response.data);
     });
   };
 
   const getPhysicalTotalMembers = () => {
-    Axios.get("http://localhost:3001/members/physical/total").then((response) => {
+    Axios.get("https://fitness-life-server.herokuapp.com/members/physical/total").then((response) => {
       setPhysicalTotalMembers(response.data);
     });
   };
 
   const getNewGraph = () => {
-    Axios.get("http://localhost:3001/members/newGraph").then((response) => {
+    Axios.get("https://fitness-life-server.herokuapp.com/members/newGraph").then((response) => {
       setNewGraph(response.data);
     });
   };
 
-  const getRevenueGraph = () => {
-    Axios.get("http://localhost:3001/shop/graph/revenue").then((response) => {
-      setRevenueGraph(response.data);
+  const getShopRevenueGraph = () => {
+    Axios.get("https://fitness-life-server.herokuapp.com/orders/graph/total-shop").then((response) => {
+      setShopRevenueGraph(response.data);
+    });
+  };
+
+  const getGymRevenueGraph = () => {
+    Axios.get("https://fitness-life-server.herokuapp.com/orders/graph/total-gym").then((response) => {
+      setGymRevenueGraph(response.data);
     });
   };
 
   const getSalesGraph = () => {
-    Axios.get("http://localhost:3001/orders/graph/sales").then((response) => {
+    Axios.get("https://fitness-life-server.herokuapp.com/orders/graph/sales").then((response) => {
       setSalesGraph(response.data);
     });
   };
@@ -91,14 +98,15 @@ function Dashboard() {
     getOnlineTotalMembers();
     getPhysicalTotalMembers();
     getNewGraph();
-    getRevenueGraph();
+    getShopRevenueGraph();
+    getGymRevenueGraph();
     getSalesGraph();
   }, []);
 
   function findTotalRevenue(){
 
     let r = 0;
-    revenue.map(({price, quantity}) => r = r + price*quantity)
+    revenue.map(({amount}) => r = r + amount)
     return r;
   }  
 
@@ -113,8 +121,6 @@ function Dashboard() {
   })
 
   const percentage = memberPercentage(perc[0], perc[1]);
-
-  console.log(salesGraph);
 
   return (
     <>
@@ -147,7 +153,7 @@ function Dashboard() {
                 <hr></hr>
                 <div className="stats">
                 <i className="far fa-calendar-alt mr-1"></i>
-                  Today
+                  Last 7 days
                 </div>
               </Card.Footer>
             </Card>
@@ -254,18 +260,10 @@ function Dashboard() {
                 <div className="ct-chart" id="chartHours">
                   <ChartistGraph
                     data={{
-                      labels: [
-                        "21",
-                        "22",
-                        "23",
-                        "24",
-                        "25",
-                        "26",
-                        "27",
-                      ],
+                      labels: graphGen(shopRevenueGraph)[1],
                       series: [
-                        [5000, 10000, 7500, 15000, 20000, 18000, 8000, 25000],
-                        [11000, 8000, 5000, 8900, 12000, 10000, 25000, 16000],
+                        graphGen(shopRevenueGraph)[0],
+                        graphGen(gymRevenueGraph)[0],
                       ],
                     }}
                     type="Line"
@@ -327,7 +325,7 @@ function Dashboard() {
                 >
                   <ChartistGraph
                     data={{
-                      labels: [percentage, 100-percentage],
+                      labels: [percentage + " %", 100-percentage + " %"],
                       series: [percentage, 100-percentage],
                     }}
                     type="Pie"

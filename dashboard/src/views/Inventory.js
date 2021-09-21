@@ -20,13 +20,13 @@ function Inventory() {
   const [outStock, setOutStock] = useState([]);
 
   const getProductList = () => {
-    Axios.get("http://localhost:3001/product/getlist").then((response) => {
+    Axios.get("https://fitness-life-server.herokuapp.com/product/getlist").then((response) => {
       setProductList(response.data);
     });
   };
 
   const getOutStock = () => {
-    Axios.get("http://localhost:3001/product/out-stock").then((response) => {
+    Axios.get("https://fitness-life-server.herokuapp.com/product/out-stock").then((response) => {
       setOutStock(response.data);
     });
   };

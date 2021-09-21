@@ -116,7 +116,7 @@ Router.post("/delete", (req, res) => {
   const tid = req.body.tid;
   console.log(tid);
 
-  db.query("SELECT appointment.trainerId FROM appointment WHERE appointment.trainerID = ? AND appointment.date > DATE(NOW()) AND apprved = 1", [tid], (err, result) => {
+  db.query("SELECT appointment.trainerId FROM appointment WHERE appointment.trainerID = ? AND appointment.date > DATE(NOW()) AND approved = 1", [tid], (err, result) => {
         if (err) {
           console.log(err);
         } else if (result.length >= 1){
