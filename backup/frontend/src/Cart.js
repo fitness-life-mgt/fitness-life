@@ -5,13 +5,15 @@ import im6 from './components/image/im6.jpg';
 import { useState } from "react";
 import { useEffect } from "react";
 import Axios from "axios";
+import { Redirect, useHistory } from 'react-router-dom';
 
 const Cart = () => {
-
+    let history =useHistory();
     const [info, setInfo] = useState([]);
     const [totinfo, settotInfo] = useState([]);    
     const [totshipinfo, settotshipInfo] = useState([]);
-   
+    const [productID, setproductID] = useState([]);
+    //const [proId,setproId] = useState ('')
     
     
 
@@ -40,8 +42,28 @@ const Cart = () => {
         gettotInfo();
       }, []);  
     
-   
+      //remove item
+      const removeitem =(proId)=>{
+        Axios.post("http://localhost:8001/cart/deleteitem",{
+            productID:proId,            
+        },{headers:{
+             'Content-Type': 'application/json',
+         }}).then((response) => {
+             if(!response.data.error)		
+            {
+                alert("Item removed Successfully!."); 
+                history.push("/Cart");            	
 
+            }else{
+                console.log("Error!");
+            }
+ 
+        }).catch(error=>{
+            alert(error);
+        })
+ 
+     };
+ 
     return (
         <>
         <div className="line2"></div> 
@@ -70,7 +92,10 @@ const Cart = () => {
                             <td>In stock</td>
                             <td><input class="form-control" type="text" value="1" /></td>
                             <td class="text-right">Rs {val.price}.00 /=</td>
-                            <td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> </td>
+                            <td class="text-right">
+                                <button 
+                                class="btn btn-sm btn-danger"
+                                onClick={()=>removeitem(val.productID)}><i class="fa fa-trash"></i> </button> </td>
                         </tr>
                                       );
                                     })}  
