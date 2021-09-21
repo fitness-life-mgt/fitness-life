@@ -10,15 +10,17 @@ import routes from "routes.js";
 import Product from "views/shop/Product";
 import AllTrainers from "views/trainers/AllTrainers";
 import Trainer from "views/trainers/Trainer";
-import Workout from "views/Workout";
+import Workout from "views/workouts/Workout";
 import TrainerAddNew from "views/trainers/AddNew";
 import CompleteOrders from "views/shop/CompleteOrders";
 import ProductAddNew from "views/shop/AddNew";
-import Program from "views/Program";
+import Program from "views/programs/Program";
 import FileUpload from "views/upload/FileUpload";
 import Order from "views/shop/Order";
 import Member from "views/members/Member";
 import MemberAddNew from "views/members/AddNew";
+import WorkoutAddNew from "views/workouts/AddNew";
+import ProgramAddNew from "views/programs/AddNew";
 
 function Admin() {
   const location = useLocation();
@@ -70,9 +72,12 @@ function Admin() {
               <Route path="/admin/member/:id" exact component={Member}></Route>
               <Route path="/admin/add-trainer" exact component={TrainerAddNew}></Route>
               <Route path="/admin/add-member" exact component={MemberAddNew}></Route>
-              <Route path="/admin/workout" exact component={Workout}></Route>
+              <Route path="/admin/add-workout" exact component={WorkoutAddNew}></Route>
+              <Route path="/admin/add-program" exact component={ProgramAddNew}></Route>
               <Route path="/admin/orders/completed" exact component={CompleteOrders}></Route>
               <Route path="/admin/order/:id" exact component={Order}></Route>
+              <Route path="/admin/program/:id" exact component={Program}></Route>
+              <Route path="/admin/workout/:id" exact component={Workout}></Route>
               <Route path="/admin/program" exact component={Program}></Route>
               <Route path="/admin/upload" exact component={FileUpload}></Route>
             </Switch>

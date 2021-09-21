@@ -25,13 +25,11 @@ Router.post("/update", (req, res) => {
   const pid = req.body.pid
   const pName = req.body.pName;
   const pDesc = req.body.pDesc;
-  const pQuantity = req.body.pQuantity;
-  const pPrice = req.body.pPrice;
   const uploadedFile = req.body.uploadedFile;
 
   db.query(
-    "UPDATE product SET productName=?, price=?, quantity=?, description=?,imageUrl=? WHERE productId=?",
-    [pName, pPrice, pQuantity, pDesc, uploadedFile.filePath, pid],
+    "UPDATE program SET programName=?, description=?,imageUrl=? WHERE programId=?",
+    [pName, pDesc, uploadedFile.filePath, pid],
     (err, result) => {
       if (err) {
         console.log(err);
@@ -44,7 +42,7 @@ Router.post("/update", (req, res) => {
 
 Router.get("/get", (req, res) => {
   var queryParams = req.query;
-  db.query("SELECT * FROM product WHERE productID = ?", [queryParams.id], (err, result) => {
+  db.query("SELECT * FROM program WHERE programID = ?", [queryParams.id], (err, result) => {
     if (err) {
       console.log(err);
     } else {
