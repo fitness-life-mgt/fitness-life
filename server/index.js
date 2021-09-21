@@ -18,6 +18,8 @@ var ProductRoutes = require('./routes/products')
 var signupRoutes = require('./routes/signup')
 var loginRoutes = require('./routes/login')
 var resetRoutes = require('./routes/reset')
+var programRoutes = require('./routes/programs')
+var workoutRoutes = require('./routes/workouts')
 
 app.use(cors({
   origin:["https://fitness-life-dashboard.herokuapp.com"],
@@ -49,6 +51,8 @@ app.use("/product", ProductRoutes);
 app.use("/signup", signupRoutes);
 app.use("/login", loginRoutes);
 app.use("/reset", resetRoutes);
+app.use("/programs", programRoutes);
+app.use("/workouts", workoutRoutes);
 
 const port = process.env.PORT || 8001;
 
