@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import Axios from "axios";
+import { Link } from 'react-router-dom';
 // react-bootstrap components
 import {
   Button,
@@ -43,6 +44,14 @@ function Workouts() {
             <Card>
               <Card.Header>
                 <Card.Title as="h4">Workout Programs</Card.Title>
+                <Link to="/admin/add-program">
+                  <Button
+                    className="btn-fill pull-right"
+                    variant="primary"
+                  >
+                    Add New Program
+                  </Button>
+                </Link>
               </Card.Header>
               <Card.Body>
                   <Row>
@@ -56,7 +65,7 @@ function Workouts() {
                           <Card.Text>
                           {val.description}
                           </Card.Text>
-                          <Button variant="primary" className="pull-right">Edit Program</Button>
+                          <Link to={'/admin/program/' + val.programID}><Button variant="primary" className="pull-right">Edit Program</Button></Link>
                         </Card.Body>
                       </Card>
                     </Col>
@@ -73,6 +82,14 @@ function Workouts() {
             <Card>
               <Card.Header>
                 <Card.Title as="h4">Workouts</Card.Title>
+                <Link to="/admin/add-workout">
+                  <Button
+                    className="btn-fill pull-right"
+                    variant="primary"
+                  >
+                    Add New Workout
+                  </Button>
+                </Link>
               </Card.Header>
               <Card.Body>
                   <Row>
@@ -86,7 +103,7 @@ function Workouts() {
                           <Card.Text>
                           {val.description}
                           </Card.Text>
-                          <Button variant="primary" className="pull-right">Edit Workout</Button>
+                          <Link to={'/admin/workout/' + val.workoutID}><Button variant="primary" className="pull-right">Edit Workout</Button></Link>
                         </Card.Body>
                       </Card>
                     </Col>
