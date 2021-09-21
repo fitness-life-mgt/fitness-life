@@ -13,7 +13,7 @@ Router.get("/ordersview",(req,res)=>{
           }else{
             var mememail =remail[0].email;
             db.query(
-                "SELECT wishlist.qty,product.productName,product.imageUrl,product.price  FROM wishlist INNER JOIN product ON wishlist.productID = product.productID WHERE email=?",mememail,
+                "SELECT wishlist.qty,product.productName,product.imageUrl,product.price,product.productID  FROM wishlist INNER JOIN product ON wishlist.productID = product.productID WHERE email=?",mememail,
                 (err, result) => {
                 if (err) {
                 console.log(err);
