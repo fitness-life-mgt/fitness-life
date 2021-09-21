@@ -1,5 +1,7 @@
 import React from "react";
 import { useState } from "react";
+import { useEffect } from "react";
+import Axios from "axios";
 // react-bootstrap components
 import {
   Button,
@@ -13,6 +15,26 @@ import {
 
 function Workouts() {
 
+  const [programList, setProgramList] = useState([]);
+  const [workoutList, setWorkoutList] = useState([]);
+
+  const getProgramList = () => {
+    Axios.get("http://localhost:8001/programs/getlist").then((response) => {
+      setProgramList(response.data);
+    });
+  };
+
+  const getWorkoutList = () => {
+    Axios.get("http://localhost:8001/workouts/getlist").then((response) => {
+      setWorkoutList(response.data);
+    });
+  };
+
+  useEffect(() => {
+    getProgramList();
+    getWorkoutList();
+  }, []);
+
   return (
     <>
       <Container fluid>
@@ -24,42 +46,22 @@ function Workouts() {
               </Card.Header>
               <Card.Body>
                   <Row>
+                  {programList.map((val, key) => {
+                        return (
                     <Col className="pr-1" md="4">
                       <Card>
-                        <Card.Img variant="top" src={require("assets/img/im10.png").default} />
+                        <Card.Img variant="top" src={val.imageUrl} />
                         <Card.Body>
-                          <Card.Title>Arm Workouts</Card.Title>
+                          <Card.Title>{val.programName}</Card.Title>
                           <Card.Text>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+                          {val.description}
                           </Card.Text>
                           <Button variant="primary" className="pull-right">Edit Program</Button>
                         </Card.Body>
                       </Card>
                     </Col>
-                    <Col className="pr-1" md="4">
-                      <Card>
-                        <Card.Img variant="top" src={require("assets/img/im11.jpg").default} />
-                        <Card.Body>
-                          <Card.Title>Ab Workouts</Card.Title>
-                          <Card.Text>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-                          </Card.Text>
-                          <Button variant="primary" className="pull-right">Edit Program</Button>
-                        </Card.Body>
-                      </Card>
-                    </Col>
-                    <Col className="pr-1" md="4">
-                      <Card>
-                        <Card.Img variant="top" src={require("assets/img/im12.jpg").default} />
-                        <Card.Body>
-                          <Card.Title>Leg Workouts</Card.Title>
-                          <Card.Text>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-                          </Card.Text>
-                          <Button variant="primary" className="pull-right">Edit Program</Button>
-                        </Card.Body>
-                      </Card>
-                    </Col>
+                    );
+                  })}
                   </Row>             
               </Card.Body>
             </Card>
@@ -74,54 +76,22 @@ function Workouts() {
               </Card.Header>
               <Card.Body>
                   <Row>
+                  {workoutList.map((val, key) => {
+                        return (
                     <Col className="pr-1" md="3">
                       <Card>
-                        <Card.Img variant="top" src={require("assets/img/img.jpg").default} />
+                        <Card.Img variant="top" src={val.image} />
                         <Card.Body>
-                          <Card.Title>Workout Name</Card.Title>
+                          <Card.Title>{val.workoutName}</Card.Title>
                           <Card.Text>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+                          {val.description}
                           </Card.Text>
                           <Button variant="primary" className="pull-right">Edit Workout</Button>
                         </Card.Body>
                       </Card>
                     </Col>
-                    <Col className="pr-1" md="3">
-                      <Card>
-                        <Card.Img variant="top" src={require("assets/img/img.jpg").default} />
-                        <Card.Body>
-                          <Card.Title>Workout Name</Card.Title>
-                          <Card.Text>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-                          </Card.Text>
-                          <Button variant="primary" className="pull-right">Edit Workout</Button>
-                        </Card.Body>
-                      </Card>
-                    </Col>
-                    <Col className="pr-1" md="3">
-                      <Card>
-                        <Card.Img variant="top" src={require("assets/img/img.jpg").default} />
-                        <Card.Body>
-                          <Card.Title>Workout Name</Card.Title>
-                          <Card.Text>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-                          </Card.Text>
-                          <Button variant="primary" className="pull-right">Edit Workout</Button>
-                        </Card.Body>
-                      </Card>
-                    </Col>
-                    <Col className="pr-1" md="3">
-                      <Card>
-                        <Card.Img variant="top" src={require("assets/img/img.jpg").default} />
-                        <Card.Body>
-                          <Card.Title>Workout Name</Card.Title>
-                          <Card.Text>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-                          </Card.Text>
-                          <Button variant="primary" className="pull-right">Edit Workout</Button>
-                        </Card.Body>
-                      </Card>
-                    </Col>
+                    );
+                  })}
                   </Row>             
               </Card.Body>
             </Card>
