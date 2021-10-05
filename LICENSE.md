@@ -2,11 +2,16 @@ Copyright (c) 2021 by Fitness Life
 
 TEAM OF DEVELOPERS:
 
-  D.P.H.M. Dasanayake
-  V.P.N. Lakmali
-  U.V. Hewapathirana
-  P.M.D. Silva
-  W.M.C.M Wickramasinghe
+  - D.P.H.M. Dasanayake
+  
+  - V.P.N. Lakmali
+  
+ -  U.V. Hewapathirana
+  
+  - P.M.D. Silva
+  
+ -  W.M.C.M Wickramasinghe
+  
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 
